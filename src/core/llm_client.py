@@ -38,8 +38,9 @@ class LLMClient:
         # google-genai のクライアント初期化
         self.client = genai.Client(api_key=self.api_key)
         
-        # モデルの指定 (Gemini 2.0 Flash / 3.1 Pro 相当の最新プレビュー版を使用)
-        self.model_name = "gemini-3-flash-preview"
+        # モデルの指定: 高性能な を使用
+        # Flash版よりも推論能力が高く、品質モデルの深化に適しています。
+        self.model_name = "gemini-3.1-pro-preview-customtools"
         
     def generate_content(self, prompt: str, max_retries=3, backoff_factor=2) -> str:
         """
