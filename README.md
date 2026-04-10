@@ -2,6 +2,10 @@
 
 本リポジトリは、ASDoQ（システム開発文書品質研究会）が定義する「文書品質モデル v2.0a-3」の全17個の品質副特性を、最新のLLM（Gemini API）を用いて高品質な実務用Excelファイルへと自動的に再構成するマルチエージェント・システムです。
 
+### プロジェクトについて
+- **名前の由来**: 「副特性別の再構成モデル」の英語（Reconstruction Model by Secondary Character）を短縮して `RecoModel2ndChara` と名付けました。
+- **Antigravity最適化**: 本ツールは AI エディタ **Antigravity** を用いて開発されています。Antigravityでプロジェクトを開けば、特別な設定なしですぐに開発や実行が可能です。
+
 ---
 
 ## 🌟 主な特徴
@@ -20,6 +24,10 @@
 ## 📖 開発プロセス (DADA)
 
 本システムは、**DADA（Document-and-Agent-Driven Agile）** プロセスに従って開発されました。これは、AIエージェントが「要求仕様書」や「設計書」を自律的に最新へと更新し、人間（Product Owner）がそれを承認してから実装・テストに進む手法です。
+
+> [!TIP]
+> **DADAプロセスのテンプレートリポジトリ**をGitHubで公開しています。新規プロジェクトの開始に活用してください：
+> [yamaPiT/AntigravityTemplate](https://github.com/yamaPiT/AntigravityTemplate)
 
 ### DADAプロセス フローチャート
 ```mermaid
@@ -61,10 +69,17 @@ graph TD
     ```bash
     pip install -r requirements.txt
     ```
-3.  `.env.example` をコピーして `.env` を作成し、Google Gemini APIキーを設定します：
-    ```env
-    GEMINI_API_KEY=あなたのAPIキー
-    ```
+3.  `.env.example` をコピーして **`.env`** ファイルを作成し、中身の `GEMINI_API_KEY` の部分に自分のAPIキーを貼り付けます。
+    
+#### 🔑 Gemini APIキーの取得手順
+1.  **[Google AI Studio](https://ai.google.dev/gemini-api/docs/api-key?hl=ja)** にアクセスし、Googleアカウントでログインします。
+2.  左側のメニューにある **「Get API key」** をクリックし、画面中央の **「Create API key」** ボタン（青色）を押します。
+3.  「Search a project」からプロジェクトを選択（初めての場合はデフォルトのままでOK）し、**「Create API key in existing project」** を押すと、長い文字列（APIキー）が表示されます。これをコピーして `.env` に貼り付けてください。
+
+#### 💳 従量課金設定と安全装置の推奨
+無料枠を超える利用や最新モデルの安定利用には従量課金の設定が必要です。
+- **[課金設定のガイド](https://ai.google.dev/gemini-api/docs/billing?hl=ja)**
+- **安全装置の設置（強く推奨）**: プログラムのバグによる無限ループなどの不測の事態を防ぐため、Google AI Studio または Google Cloud の管理画面で **「支出上限設定」** や **「予算アラート」** を必ず設定しておきましょう。「◯円を超えたら通知・停止する」設定を行うことで、安心して開発を進められます。
 
 ### 2. 実行
 メインスクリプトを実行すると、全17副特性の再構成が開始されます。
